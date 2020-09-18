@@ -84,13 +84,11 @@ public:
                 LastGeneration = CurrentGeneration;
                 CurrentGeneration = NextGeneration;
             }
-            //std::this_thread::sleep_for(std::chrono::milliseconds(1));
             printUniverse();
-            
             genNextGeneration();
             not_first = true;
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
             clearPrint();
-            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
         std::cout << "Life has stopped at " << generationNumber << " generation" << std::endl;
     }
@@ -174,7 +172,9 @@ public:
         std::cout << ' ' << std::endl;
     }
     void clearPrint() {
-        std::cout << CLEAR;
+        //std::cout << CLEAR;
+		std::cout.flush(); // Flush the output stream
+    	system("clear"); // Clear the console with the "system" function
     }
 private:
     size_t CellsNumber;
